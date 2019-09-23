@@ -50,4 +50,13 @@ public class UtilsCursor {
         }
         return value;
     }
+
+    public static double getFloatFromCursor(String key, Cursor cursor) {
+        double value = 0.0;
+        int colIndex = cursor.getColumnIndex(key);
+        if (colIndex > -1) {
+            value = cursor.getDouble(colIndex);
+        }
+        return value;
+    }
 }

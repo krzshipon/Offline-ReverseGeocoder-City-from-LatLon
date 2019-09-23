@@ -11,6 +11,7 @@ import android.util.Log;
 import com.cyclicsoft.offlinereversegeocoder.R;
 import com.cyclicsoft.offlinereversegeocoder.database.DatabaseConstants;
 import com.cyclicsoft.offlinereversegeocoder.database.DatabaseController;
+import com.cyclicsoft.offlinereversegeocoder.model.GeoNameDBModel;
 import com.cyclicsoft.offlinereversegeocoder.reversegeocoder.ReverseGeoCoder;
 
 import java.io.IOException;
@@ -18,10 +19,7 @@ import java.util.Objects;
 import java.util.zip.ZipInputStream;
 
 
-// Put this in the manifest file
-// android:name="com.cyclicsoft.eubus.base.BaseApplication">
 public class BaseApp extends Application {
-    // private ArrayList<String> mLocalList = new ArrayList<String>();
     private final String TAG = getClass().getSimpleName();
 
     public void onCreate() {
@@ -53,7 +51,7 @@ public class BaseApp extends Application {
                 DatabaseController dbController = DatabaseController.getInstance();
                 dbController.createDatabase(getApplicationContext(), DatabaseConstants.DATABASE_NAME, DatabaseConstants.DATABASE_VERSION);
                 //Create Tables here
-
+                GeoNameDBModel.getInstance(getApplicationContext()).createTable();
                 initReverseGeoCoder();
                 return null;
             }

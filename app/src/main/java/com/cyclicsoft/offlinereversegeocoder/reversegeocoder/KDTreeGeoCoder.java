@@ -81,7 +81,7 @@ public final class KDTreeGeoCoder extends AsyncTask<Double, Void,GeoName> {
 
             this.latitude = latLongs[0];
             this.longitude = latLongs[1];
-            return ReverseGeoCoder.getInstance().nearestPlace(this.latitude,this.longitude);
+            return ReverseGeoCoder.getInstance(context).nearestPlace(this.latitude,this.longitude);
 
         }catch (ArrayIndexOutOfBoundsException e){
             if(this.enableDebugging) {

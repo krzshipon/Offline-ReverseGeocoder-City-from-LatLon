@@ -58,13 +58,13 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         new Thread(() -> {
-            GeoName city = Objects.requireNonNull(ReverseGeoCoder.getInstance()).nearestPlace(lat, lon);
+            GeoName city = Objects.requireNonNull(ReverseGeoCoder.getInstance(getApplicationContext())).nearestPlace(lat, lon);
             if(city == null){
                 return;
             }
             runOnUiThread(()->{
                 tvCity.setText(city.getCityNameByLanguageCode(Locale.getDefault().getLanguage()));
-                tvCountry.setText(city.countryCode);
+                tvCountry.setText(city.getCountryCode());
             });
         }).start();
     }

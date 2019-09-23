@@ -27,6 +27,7 @@ THE SOFTWARE.
 package com.cyclicsoft.offlinereversegeocoder.reversegeocoder;
 
 
+import android.content.Context;
 import android.util.Log;
 
 import com.cyclicsoft.offlinereversegeocoder.Constants;
@@ -45,18 +46,18 @@ import static java.lang.Math.toRadians;
 public class GeoName extends KDNodeComparator<GeoName> {
 
     public static final String TAG = GeoName.class.getSimpleName();
-    public String name;
-    public double latitude;
-    public double longitude;
-    public double point[] = new double[3]; // The 3D coordinates of the point
-    public String countryCode;
-    public String jaName;
-    public String zhName;
-    public String koName;
-    public String itName;
-    public String deName;
-    public String esName;
-    public String frName;
+    private String name;
+    private double latitude;
+    private double longitude;
+    private double point[] = new double[3]; // The 3D coordinates of the point
+    private String countryCode;
+    private String jaName;
+    private String zhName;
+    private String koName;
+    private String itName;
+    private String deName;
+    private String esName;
+    private String frName;
 
 
     GeoName(String data) {

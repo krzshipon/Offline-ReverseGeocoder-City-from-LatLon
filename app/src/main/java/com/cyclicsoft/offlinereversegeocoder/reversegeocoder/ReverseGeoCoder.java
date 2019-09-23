@@ -27,11 +27,13 @@ THE SOFTWARE.
 package com.cyclicsoft.offlinereversegeocoder.reversegeocoder;
 
 
+import android.content.Context;
 import android.content.res.AssetManager;
 
 
 import androidx.annotation.Nullable;
 
+import com.cyclicsoft.offlinereversegeocoder.model.GeoNameDBModel;
 import com.cyclicsoft.offlinereversegeocoder.reversegeocoder.kdtree.KDTree;
 
 import java.io.BufferedReader;
@@ -48,6 +50,7 @@ import java.util.zip.ZipInputStream;
  */
 public class ReverseGeoCoder {
 
+    private static Context mContext;
     private final String TAG = this.getClass().getSimpleName();
     private static ReverseGeoCoder reverseGeoCoder = null;
 
@@ -129,7 +132,8 @@ public class ReverseGeoCoder {
      * @return
      */
     @Nullable
-    public static ReverseGeoCoder getInstance() {
+    public static ReverseGeoCoder getInstance(Context context) {
+        mContext = context;
         return reverseGeoCoder;
     }
 
@@ -146,6 +150,7 @@ public class ReverseGeoCoder {
 //                PTLog.d(TAG, "line--> "+count);
                 count++;
                 GeoName newPlace = new GeoName(str);
+                GeoNameDBModel.getInstance(mContext).insertGeoName(newPlace);
                 arPlaceNames.add(newPlace);
             }
         } catch (IOException ex) {
