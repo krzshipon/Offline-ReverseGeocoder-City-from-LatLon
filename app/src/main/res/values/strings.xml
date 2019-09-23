@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">ReverseGeocoder City from LatLon (Offline )</string>
+    <string name="app_name">ReverseGeoCoder(Offline)</string>
+    <string name="latitude">Latitude</string>
+    <string name="city_title">CITY:</string>
+    <string name="not_geocoded_yet">Not geocoded yet</string>
+    <string name="longitude">longitude</string>
+    <string name="show_city_info">Show City Info</string>
+    <string name="country">Country</string>
 </resources>
