@@ -4,6 +4,7 @@
     package="com.cyclicsoft.offlinereversegeocoder">
 
     <application
+        android:name=".database.Base.BaseApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
