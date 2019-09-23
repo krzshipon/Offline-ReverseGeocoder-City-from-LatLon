@@ -3,11 +3,19 @@
  */
 package com.cyclicsoft.offlinereversegeocoder.database.Base;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.os.AsyncTask;
+import android.util.Log;
 
+import com.cyclicsoft.offlinereversegeocoder.R;
 import com.cyclicsoft.offlinereversegeocoder.database.DatabaseConstants;
 import com.cyclicsoft.offlinereversegeocoder.database.DatabaseController;
+import com.cyclicsoft.offlinereversegeocoder.reversegeocoder.ReverseGeoCoder;
+
+import java.io.IOException;
+import java.util.Objects;
+import java.util.zip.ZipInputStream;
 
 
 // Put this in the manifest file
@@ -28,6 +36,7 @@ public class BaseApp extends Application {
     /**
      * We need a folder, localization, or other data that should be available in whole application.
      */
+    @SuppressLint("StaticFieldLeak")
     public void init() {
         // Create Download Folder.
        // File file = new File(com.cyclicsoft.eubus.util.Constants.PATH_DOWNLOAD);
@@ -41,10 +50,11 @@ public class BaseApp extends Application {
 
             @Override
             protected Void doInBackground(Void... voids) {
-                DatabaseController databaseConterller = DatabaseController.getInstance();
-                databaseConterller.createDatabase(getApplicationContext(), DatabaseConstants.DATABASE_NAME, DatabaseConstants.DATABASE_VERSION);
+                DatabaseController dbController = DatabaseController.getInstance();
+                dbController.createDatabase(getApplicationContext(), DatabaseConstants.DATABASE_NAME, DatabaseConstants.DATABASE_VERSION);
                 //Create Tables here
 
+                initReverseGeoCoder();
                 return null;
             }
 
@@ -53,5 +63,14 @@ public class BaseApp extends Application {
                 super.onPostExecute(aVoid);
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    }
+
+    private void initReverseGeoCoder() {
+        try {
+            ZipInputStream zipInputStream = new ZipInputStream(getResources().openRawResource(R.raw.city_coordinates_list_locality));
+            ReverseGeoCoder.initialize(zipInputStream, true);
+        } catch (IOException e) {
+            Log.e(TAG, Objects.requireNonNull(e.getMessage()));
+        }
     }
 }

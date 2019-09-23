@@ -5,7 +5,7 @@
 package com.cyclicsoft.offlinereversegeocoder.database;
 
 
-import com.cyclicsoft.eubus.common.model.SObject;
+import com.cyclicsoft.offlinereversegeocoder.database.model.SObject;
 
 public class SEntity extends SObject {
 
